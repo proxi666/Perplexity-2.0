@@ -1,0 +1,6 @@
+langgraph
+langchain_deepseek
+langchain_core
+python-dotenv
+fastapi
+langchain_community

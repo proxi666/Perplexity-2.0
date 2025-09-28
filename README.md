@@ -6,14 +6,7 @@ Perplexity 2.0 is a full-stack research assistant that pairs a LangGraph-powered
 
 ![Interface preview](docs/ui-preview.png)
 
-<details>
-<summary><strong>▶ Watch the end-to-end demo</strong></summary>
-
-<video src="docs/demo.gif" controls width="100%" preload="metadata"></video>
-
-
-
-</details>
+🎞️ **Preview :** [`docs/demo.gif`](docs/demo.gif)
 
 ---
 
@@ -141,4 +134,3 @@ Open `http://localhost:3000` and start a conversation. Press `Esc` to stop the c
    - Follow-up questions reuse the saved checkpoint; stopping or clearing threads resets the state.
 
 ---
-

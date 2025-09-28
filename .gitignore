@@ -1,1 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Node/Next.js
+client/my-app/node_modules/
+client/my-app/.next/
+client/my-app/.vercel/
+
+# Env
 .env
+.env.*
+

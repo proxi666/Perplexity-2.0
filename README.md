@@ -9,7 +9,7 @@ Perplexity 2.0 is a full-stack research assistant that pairs a LangGraph-powered
 <details>
 <summary><strong>▶ Watch the end-to-end demo</strong></summary>
 
-<video src="docs/demo-fast.mp4" controls width="100%" preload="metadata"></video>
+<video src="docs/demo.gif" controls width="100%" preload="metadata"></video>
 
 
 

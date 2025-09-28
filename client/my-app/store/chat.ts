@@ -171,7 +171,8 @@ export const useChatStore = create<ChatStore>()(
           return;
         }
 
-        const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
+        const apiBaseUrl =
+          process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
         let threadId = get().activeThreadId;
         const currentThreads = get().threads;

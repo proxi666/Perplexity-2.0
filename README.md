@@ -134,3 +134,39 @@ Open `http://localhost:3000` and start a conversation. Press `Esc` to stop the c
    - Follow-up questions reuse the saved checkpoint; stopping or clearing threads resets the state.
 
 ---
+
+## 🐳 Containerisation & Deployment
+
+### Local Docker workflow
+
+```bash
+# build from the repo root so requirements.txt is in the Docker context
+docker build -f server/Dockerfile -t perplexity:latest .
+
+# run the API container (exposes the SSE endpoint on localhost:8000)
+docker run -d \
+  -p 8000:8000 \
+  -e GROQ_API_KEY="<your_groq_key>" \
+  -e TAVILY_API_KEY="<your_tavily_key>" \
+  --name perplexity-container \
+  perplexity:latest
+
+# tail logs if you want to monitor streaming traffic
+docker logs -f perplexity-container
+```
+
+Point the frontend at the container by setting `NEXT_PUBLIC_API_BASE_URL=http://localhost:8000` in `client/my-app/.env.local` before running `npm run dev`.
+
+### Render deployment notes
+
+The project is tested on Render using the same `server/Dockerfile`.
+
+1. Create a new **Web Service** in Render and select “Deploy from GitHub”.
+2. Pick this repo and, when prompted, keep “Docker” as the runtime (`server/Dockerfile` is detected automatically).
+3. Set the **Start Command** to rely on the image default (or explicitly: `uvicorn code:app --host 0.0.0.0 --port ${PORT:-8000}`).
+4. Add required environment variables: `GROQ_API_KEY`, `TAVILY_API_KEY`, and optionally `PIP_DEFAULT_TIMEOUT=120` to smooth out large dependency downloads during build.
+5. After the backend deploys, configure the frontend with `NEXT_PUBLIC_API_BASE_URL=https://<render-app>.onrender.com` so the UI calls the hosted API.
+
+Render performs health probes against the root path; the FastAPI app responds 404 by design, but `/docs` and `/openapi.json` return 200, confirming the service is healthy. Avoid committing `.env.local` or other files that contain secrets—Render manages API keys via its dashboard.
+
+---
